@@ -4,7 +4,8 @@ import { useAddTransaction } from '../../hooks/useAddTransaction'
 import { useGetTransactions } from '../../hooks/useGetTransactions'
 import { useGetUserInfo } from '../../hooks/useGetUserInfo'
 import { signOut } from 'firebase/auth';
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore'
 import toast from 'react-hot-toast';
 
 const ExpenseTracker = () => {
@@ -48,6 +49,21 @@ const ExpenseTracker = () => {
       navigate("/");
       
       toast.success("Signed out successfully")
+    }
+    catch(error){
+      toast.error(error.message);
+    }
+  }
+
+  const deleteTransaction = async(id) => {
+    try{
+      const transactionDoc = doc(db, "transactions", id);
+
+      const transaction = await getDoc(transactionDoc);
+      const data = transaction.data();
+
+      await deleteDoc(transactionDoc);
+      toast.success(`Transaction '${data.description}' deleted successfully`);
     }
     catch(error){
       toast.error(error.message);
@@ -104,6 +120,7 @@ const ExpenseTracker = () => {
                 <p>₹ {transactionAmount}</p>
                 <p className={`${transactionType === "income" ? "text-green-500" : "text-red-500"}`}>{transactionType}</p>
                 <p>{time}</p>
+                <button onClick={()=>deleteTransaction(transaction.id)} className='bg-red-500'>Delete Transaction</button>
               </li>
             )
           })}
