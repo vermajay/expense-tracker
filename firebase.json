@@ -13,7 +13,6 @@
         "destination": "/index.html"
       }
     ],
-    "target": "trackmyexpenses",
     "reserved": [
       {
         "site": "trackmyexpenses",
