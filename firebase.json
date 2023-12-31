@@ -6,6 +6,23 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "target": "trackmyexpenses",
+    "reserved": [
+      {
+        "site": "trackmyexpenses",
+        "domain": "trackmyexpenses.web.app"
+      },
+      {
+        "site": "trackmyexpenses",
+        "domain": "trackmyexpenses.firebaseapp.com"
+      }
     ]
   }
 }
