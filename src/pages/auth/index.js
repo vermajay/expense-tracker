@@ -30,10 +30,10 @@ const Auth = () => {
   if(isAuth) return <Navigate to="track"/>
 
   return (
-    <div>
-      <button onClick={signInWithGoogle}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >sign in with google</button>
+    <div class="flex justify-center items-center h-screen">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={signInWithGoogle}>
+        Sign In With Google
+      </button>
     </div>
   )
 }
